@@ -2,7 +2,7 @@
 
 ### Norske kommunenummer
 
-R-skriptet `SSB.R` henter alle kommunestandarder etter 2007 fra [SSBs API](https://data.ssb.no/api/klass/v1/api-guide.html). 
+R-skriptet `ssb.R` henter alle kommunestandarder etter 2007 fra [SSBs API](https://data.ssb.no/api/klass/v1/api-guide.html). 
 
 Objektet `all_kommklasses` inneholder alle kommuner i perioden 2007-2024. Hvis man ønsker en tabell med 2024-kommuner, kan det gjøres slik: 
 
