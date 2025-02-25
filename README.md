@@ -36,6 +36,8 @@ source(ssb.R)
 
 find_newest_komm('1920', correspondance)
 
+> 5518
+
 ```
 
 I dette eksempelet returnerer funksjonen kommunenenummeret `1108`, som er det nye kommunenummeret til Sandes etter sammenslåingen med 1129-Forsand i 2020. 
@@ -44,5 +46,7 @@ I dette eksempelet returnerer funksjonen kommunenenummeret `1108`, som er det ny
 source(ssb.R)
 
 find_newest_komm('1920', correspondance)
+
+> 1108
 
 ```
