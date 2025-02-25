@@ -47,6 +47,6 @@ source(ssb.R)
 
 find_newest_komm('1920', correspondance)
 
-> 1108
+> 1108  
 
 ```

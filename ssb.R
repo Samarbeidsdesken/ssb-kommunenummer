@@ -11,13 +11,11 @@ d.tmp<-GET(url)
 d.tmp
 
 # Henter ut innholdet fra d.tmp kun som tekst og deretter bearbeides av fromJSONstat
-kommuneklass <- 
-    as_tibble()
 
 # behandle klassifiseringsversjonene, og bare ta vare på versjoner etter 2007
 kommuneklass <- 
     jsonlite::fromJSON(content(d.tmp, "text", encoding = "utf-8"))$versions |>
-    as_tibble()
+    as_tibble() |>
     mutate(
         year = as.numeric(str_sub(name, nchar(name) - 4 + 1, nchar(name))),
         validFrom = as.Date(validFrom, "%Y-%m-%d"),
