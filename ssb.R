@@ -35,7 +35,7 @@ fylkesklass <-
         validFrom = as.Date(validFrom, "%Y-%m-%d"),
         validTo = as.Date(validTo, "%Y-%m-%d")
     )  |>
-    filter(validFrom == max(validFrom))
+    filter(year > 2007)
 
 # funksjon for å hente ut alle kommuneversjoner fra lenkene i datasettet
 # Returnerer datasett
@@ -63,16 +63,19 @@ get_version <- function(url){
 
 #get_version('http://data.ssb.no/api/klass/v1/versions/1847')
 
-fylker2024 <- 
-    get_version(fylkesklass$`_links`$self$href)
+# Hent alle fylkeskoder
+all_fylkeklasses <- 
+    lapply(fylkesklass$`_links`$self$href, get_version) |>
+    bind_rows()
 
 # Hent alle kommunerkoder
 all_kommklasses <- 
     lapply(kommuneklass$`_links`$self$href, get_version) |>
     bind_rows()
 
-all_kommklasses |> 
-    tail()
+#all_kommklasses |> 
+#    filter(ar == 2024)
+#    tail()
 
 
 # Alle kommuneedringer. 
@@ -191,7 +194,7 @@ find_newest_komm <-
                 filter(oldCode == code)  |>
                 pull(newCode)
 
-            print(newCode)
+            #print(newCode)
 
                 if(identical(newCode, character(0))) {
                     newCode = ''
@@ -205,3 +208,6 @@ find_newest_komm <-
             }
             return(newCode)
 }
+
+
+find_newest_komm('1920', correspondance)
