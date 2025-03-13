@@ -9,7 +9,8 @@ Objektet `all_kommklasses` inneholder alle kommuner i perioden 2007-2024. Hvis m
 ```
 source('ssb.R')
 
-all_kommklasses |> 
+kommnr_2024 <-
+    all_kommklasses |> 
     filter(ar == 2024)
 
 ```
@@ -48,5 +49,18 @@ source('ssb.R')
 find_newest_komm('1920', correspondance)
 
 > 1108  
+
+```
+
+Hvis du ikke har kommunenummer, bare kommunenavn, men ønsker å koble på kommunenummer ved hjelp av navn, oppstår det ofte problem med kommuner som har samiske og norske navn. 
+
+Funksjonen `fuzzfind()`bruker regex til å matche hele ord i kommunenavnet. 
+
+```
+source('ssb.R')
+
+fuzzfind('Levanger - Levangke', kommnr_2024)
+
+> 5037
 
 ```

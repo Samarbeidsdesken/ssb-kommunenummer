@@ -213,3 +213,18 @@ find_newest_komm <-
 
 
 find_newest_komm('1920', correspondance)
+
+
+
+# funksjon for å fuzz-matche kommunenavn 
+# Fortrinnsvis nødvendig for kommuner med samisk navn
+fuzzfind <- 
+    function(x, df){
+        sapply(x, function(val) {
+            code <- df |> 
+            filter(str_detect(name, paste0('\\b', val, '\\b'))) |> 
+            pull(code)
+        
+        if (length(code) == 0) NA_character_ else code[1]
+    })
+    }
