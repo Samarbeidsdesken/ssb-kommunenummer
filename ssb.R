@@ -180,7 +180,7 @@ correspondance |>
 # df$code2024 <- unlist(map(df$kommnrold, function(x){find_newest(x, correspondance)}))
 
 
-find_newest_komm <- 
+find_newest_komm <-
     function(code, df){
 
         keep_going = TRUE
@@ -189,21 +189,25 @@ find_newest_komm <-
 
             newCode <- 
                 df |>
-                filter(oldCode == code)  |>
+                filter(code == oldCode)  |>
                 pull(newCode)
-
-            #print(newCode)
 
                 if(identical(newCode, character(0))) {
                     newCode = ''
                     break
+                }
+
+                if(length(newCode)>1) {
+                    newCode = paste(newCode, collapse = ', ')
+                    print(paste0('ADVARSEL! Kommunenummer ', code, ' resulterer i ', str_replace(newCode, ', ', ' og '), '. Kommunen er trolig splittet.'))
+                    break
                 } 
+
                 if(code == newCode){
                     keep_going = FALSE
                 } else {
                     code = newCode
-                }
-            }
+                }}
             return(newCode)
 }
 
