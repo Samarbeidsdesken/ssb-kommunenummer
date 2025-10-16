@@ -4,7 +4,7 @@ import pandas as pd
 
 
 # Henter lenken til alle kommuneinndelinger etter 2012
-def get_urls(year=2012):
+def get_urls(after=2012):
     url = "http://data.ssb.no/api/klass/v1/classifications/131"
 
     r = requests.get(url)
@@ -17,7 +17,7 @@ def get_urls(year=2012):
     for elem in versions:
         elem["year"] = int(elem["name"].removeprefix("Kommuneinndeling"))
         elem["url"] = elem["_links"]["self"]["href"]
-        if elem["year"] > 2012:
+        if elem["year"] > after:
             kommuneversjoner.append(elem)
             # print(elem)
 
@@ -25,18 +25,23 @@ def get_urls(year=2012):
 
 
 # Henter alle kommuneinndelinger og returnerer et datasett
-def get_kommuneinndeling(url, year):
+def get_kommuneinndelinger(versions):
 
-    kommuneinndelinger = []
+    df = pd.DataFrame()
 
-    r = requests.get(url)
+    for year, url in versions.items():
 
-    data = json.loads(r.text)
+        r = requests.get(url)
 
-    df = pd.DataFrame(data["classificationItems"])
-    df.drop(columns=["parentCode", "level", "shortName"], inplace=True)
-    df["year"] = year
-    df = df.iloc[:, [3, 0, 1, 2]]
+        data = json.loads(r.text)
+
+        df_sub = pd.DataFrame(data["classificationItems"])
+        df_sub.drop(columns=["parentCode", "level", "shortName"], inplace=True)
+        df_sub["year"] = year
+        df_sub = df_sub.iloc[:, [3, 0, 1, 2]]
+
+        df = pd.concat([df, df_sub])
+
     return df
 
 
@@ -64,6 +69,16 @@ def find_new_code(code, mappings):
 
 
 if __name__ == "__main__":
+
+    versions = get_urls()
+    urls = {}
+    for version in versions:
+        urls[version["year"]] = version["url"]
+
+    df = get_kommuneinndelinger(urls)
+
+    print(df[df["year"] == 2024])
+
     correspondance = get_correspondance()
-    code = find_new_code("5012", correspondance)
+    code = find_new_code("1201", correspondance)
     print(code)
