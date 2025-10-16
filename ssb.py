@@ -61,6 +61,8 @@ def find_new_code(code, mappings):
         return "1508"  # Ålesund -> Ålesund (ignorerer 1580 Haram)
     elif code == "1534":
         return "1580"  # Haram -> Haram
+    elif code == "1103":
+        return "1103"  # Haram -> Haram
 
     for m in mappings:
         if m["oldCode"] == code:
@@ -70,15 +72,17 @@ def find_new_code(code, mappings):
 
 if __name__ == "__main__":
 
-    versions = get_urls()
-    urls = {}
-    for version in versions:
-        urls[version["year"]] = version["url"]
+    # versions = get_urls()
+    # urls = {}
+    # for version in versions:
+    #    urls[version["year"]] = version["url"]
 
-    df = get_kommuneinndelinger(urls)
+    # df = get_kommuneinndelinger(urls)
 
-    print(df[df["year"] == 2024])
+    # print(df[df["year"] == 2024])
 
     correspondance = get_correspondance()
-    code = find_new_code("1201", correspondance)
+
+    print(correspondance)
+    code = find_new_code("1103", correspondance)
     print(code)
