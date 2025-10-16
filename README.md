@@ -1,9 +1,9 @@
 
 
-### Norske kommunenummer
+## Norske kommunenummer
 
 
-#### I R
+## I R
 R-skriptet `ssb.R` henter alle kommunestandarder etter 2007 fra [SSBs API](https://data.ssb.no/api/klass/v1/api-guide.html). 
 
 Objektet `all_kommklasses` inneholder alle kommuner i perioden 2007-2024. Hvis man ønsker en tabell med 2024-kommuner, kan det gjøres slik: 
@@ -67,11 +67,11 @@ fuzzfind('Levanger - Levangke', kommnr_2024)
 
 ```
 
-#### I Python
+## I Python
 
 I `ssb.py`er det laget funksjoner for å hente kommuneinndelinger og hente siste kommunenummer til et utgått kommunenummer. 
 
-##### Hente kommuneinndelinger
+### Hente kommuneinndelinger
 
 Hent et datasett med alle versjonene av Kommune-Norge. Defaut er å hente alle kommuneinndelinger etter 2012. 
 
@@ -95,7 +95,7 @@ df = get_kommuneinndelinger(urls)
 df[df["year"] == 2024]
 ```
 
-##### Hent siste versjon av kommunenummer
+### Hent siste versjon av kommunenummer
 Funksjonen `get_correspondance()` henter en korrespondansetabell fra SSB. Korrespondansetabellen oppgir det nye kommunenummeret til et gammelt kommunenummer. Feks er `oldCode` til Bergen kommune 1201. `newCode` til Bergen kommune er 4601. 
 
 Derfor returnerer denne koden `4601`:
