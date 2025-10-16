@@ -1,7 +1,9 @@
 
 
 ## Norske kommunenummer
+Brukt mange timer på kommunereformen når du behandler data? Jeg også.
 
+Dette repoet inneholder nyttig funksjoner for hurtigere behandling av kommunenummer.
 
 ## I R
 R-skriptet `ssb.R` henter alle kommunestandarder etter 2007 fra [SSBs API](https://data.ssb.no/api/klass/v1/api-guide.html). 
