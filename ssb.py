@@ -61,19 +61,23 @@ def find_new_code(code, mappings):
         return "1508"  # Ålesund -> Ålesund (ignorerer 1580 Haram)
     elif code == "1534":
         return "1580"  # Haram -> Haram
-    
+
     # Unngå evig rekursivitet
-    elif code == "1103":
-        return "1103"  # Stavanger -> Stavanger
-    elif code == "1514":
-        return "1514"  # Sande (MogR) -> Sande
-    elif code == "5001":
-        return "5001"  # Trondheim -> Trondheim
-    elif code == "5025":
-        return "5025"  # Røros -> Røros
+    # elif code == "1103":
+    #    return "1103"  # Stavanger -> Stavanger
+    # elif code == "1514":
+    #    return "1514"  # Sande (MogR) -> Sande
+    # elif code == "5001":
+    #    return "5001"  # Trondheim -> Trondheim
+    # elif code == "5025":
+    #    return "5025"  # Røros -> Røros
+    # elif code == "5037":
+    #    return "5037"  # Levanger -> Røros
 
     for m in mappings:
-        if m["oldCode"] == code:
+        if m["oldCode"] == m["newCode"] and m["newCode"] == code:
+            return code
+        elif m["oldCode"] == code:
             return find_new_code(m["newCode"], mappings)
     return code
 
@@ -92,5 +96,5 @@ if __name__ == "__main__":
     correspondance = get_correspondance()
 
     print(correspondance)
-    code = find_new_code("5001", correspondance)
+    code = find_new_code("5037", correspondance)
     print(code)
