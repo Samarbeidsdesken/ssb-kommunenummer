@@ -62,7 +62,9 @@ def find_new_code(code, mappings):
     elif code == "1534":
         return "1580"  # Haram -> Haram
     elif code == "1103":
-        return "1103"  # Haram -> Haram
+        return "1103"  # Stavanger -> Stavanger
+    elif code == "1514":
+        return "1514"  # Sande (MogR) -> Sande
 
     for m in mappings:
         if m["oldCode"] == code:
@@ -84,5 +86,5 @@ if __name__ == "__main__":
     correspondance = get_correspondance()
 
     print(correspondance)
-    code = find_new_code("1103", correspondance)
+    code = find_new_code("1514", correspondance)
     print(code)
