@@ -1,6 +1,6 @@
 
 
-## Norske kommunenummer
+## :skull: Norske kommunenummer :skull:
 Brukt mange timer på kommunereformen når du behandler data? Jeg også.
 
 Dette repoet inneholder nyttig funksjoner for hurtigere behandling av kommunenummer.
